@@ -1,8 +1,6 @@
 import React from 'react'
-import { VERSION } from '@twilio/flex-ui'
 import { FlexPlugin } from '@twilio/flex-plugin'
 
-import reducers, { namespace } from './states'
 import { setUpActions } from './actions/actions'
 import { setUpComponents } from './components/components'
 
@@ -34,22 +32,5 @@ export default class ConversationsParkAnInteractionPlugin extends FlexPlugin {
     flex.Actions.addListener('beforeCompleteTask', task => {
       flex.Actions.invokeAction('CloseInteraction', { task: task.task })
     })
-  }
-
-  /**
-   * Registers the plugin reducers
-   *
-   * @param manager { Flex.Manager }
-   */
-  registerReducers(manager) {
-    if (!manager.store.addReducer) {
-      // eslint-disable-next-line
-      console.error(
-        `You need FlexUI > 1.9.0 to use built-in redux; you are currently on ${VERSION}`
-      )
-      return
-    }
-
-    manager.store.addReducer(namespace, reducers)
   }
 }
