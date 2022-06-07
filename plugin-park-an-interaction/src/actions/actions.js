@@ -46,7 +46,7 @@ const updateConversationAttributes = async (payload, original) => {
   })
 }
 
-const parkConversation = async (payload, original) => {
+const parkInteraction = async (payload, original) => {
   if (!TaskHelper.isCBMTask(payload.task)) {
     return original(payload)
   }
@@ -118,8 +118,8 @@ const closeInteraction = async (payload, original) => {
 }
 
 export const setUpActions = () => {
-  Actions.registerAction('ParkTask', (payload, original) =>
-    parkConversation(payload, original)
+  Actions.registerAction('ParkInteraction', (payload, original) =>
+    parkInteraction(payload, original)
   )
   Actions.registerAction('CloseInteraction', (payload, original) =>
     closeInteraction(payload, original)

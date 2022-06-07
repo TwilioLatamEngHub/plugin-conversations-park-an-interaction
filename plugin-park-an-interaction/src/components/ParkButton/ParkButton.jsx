@@ -11,7 +11,7 @@ export class ParkButton extends React.PureComponent {
         color={this.props.theme.tokens.textColors}
         background={this.props.theme.tokens.backgroundColors}
         onClick={() =>
-          Actions.invokeAction('ParkTask', { task: this.props.task })
+          Actions.invokeAction('ParkInteraction', { task: this.props.task })
         }
       >
         Pause
