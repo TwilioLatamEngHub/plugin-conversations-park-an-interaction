@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Actions, withTheme } from '@twilio/flex-ui'
 
 import { StyledButton } from './ParkButton.styles'
 
-// eslint-disable-next-line import/no-unused-modules
 export class ParkButton extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -32,5 +31,4 @@ export class ParkButton extends React.PureComponent {
   }
 }
 
-// eslint-disable-next-line import/no-unused-modules
 export default withTheme(ParkButton)
