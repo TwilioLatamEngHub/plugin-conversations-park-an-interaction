@@ -1,18 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Actions, withTheme } from '@twilio/flex-ui'
 
 import { StyledButton } from './ParkButton.styles'
 
 // eslint-disable-next-line import/no-unused-modules
 export class ParkButton extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isDisabled: false,
+      cursor: 'pointer'
+    }
+  }
+
   render() {
     return (
       <StyledButton
         color={this.props.theme.tokens.textColors}
         background={this.props.theme.tokens.backgroundColors}
-        onClick={() =>
+        disabled={this.state.isDisabled}
+        style={{ cursor: this.state.cursor }}
+        onClick={() => {
+          this.setState({ isDisabled: true })
+          this.setState({ cursor: 'not-allowed' })
           Actions.invokeAction('ParkInteraction', { task: this.props.task })
-        }
+        }}
       >
         Pause
       </StyledButton>

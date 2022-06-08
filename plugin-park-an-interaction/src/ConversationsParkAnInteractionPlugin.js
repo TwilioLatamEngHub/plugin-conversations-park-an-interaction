@@ -19,7 +19,6 @@ export default class ConversationsParkAnInteractionPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
-    this.registerReducers(manager)
     setUpComponents()
     setUpActions()
 
