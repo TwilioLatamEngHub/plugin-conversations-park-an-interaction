@@ -25,7 +25,8 @@ exports.handler = async function (context, event, callback) {
       interactionSid,
       channelSid,
       taskAttributes,
-      taskChannelUniqueName
+      taskChannelUniqueName,
+      webhookSid
     } = await client.conversations
       .conversations(conversationSid)
       .fetch()
@@ -35,9 +36,16 @@ exports.handler = async function (context, event, callback) {
           interactionSid: attributes.interactionSid,
           channelSid: attributes.channelSid,
           taskAttributes: attributes.taskAttributes,
-          taskChannelUniqueName: attributes.taskChannelUniqueName
+          taskChannelUniqueName: attributes.taskChannelUniqueName,
+          webhookSid: attributes.webhookSid
         }
       })
+
+    // Remove webhook so it doesn't keep triggering if parked more than once
+    await client.conversations
+      .conversations(conversationSid)
+      .webhooks(webhookSid)
+      .remove()
 
     const inviteUrl = `${INTERACTIONS_URL}/${interactionSid}/Channels/${channelSid}/Invites`
 
