@@ -70,7 +70,7 @@ Go to the `constants.js` file (inside src > helpers) and change the URLs accordi
 Finally, to deploy the plugin, run
 
 ```bash
-twilio flex:plugins:deploy
+twilio flex:plugins:deploy --changelog "WRITE YOUR CHANGELOG HERE"
 ```
 
 You can also run the plugin locally for testing purposes:
