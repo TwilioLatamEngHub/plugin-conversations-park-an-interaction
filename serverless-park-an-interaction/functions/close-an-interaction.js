@@ -5,6 +5,7 @@ exports.handler = async function (context, event, callback) {
 
   const interactionSid = event.interactionSid
   const channelSid = event.channelSid
+  const conversationSid = event.conversationSid
 
   const headers = {
     'Access-Control-Allow-Origin': '*', // change this after to the web URL
@@ -16,6 +17,22 @@ exports.handler = async function (context, event, callback) {
   response.setHeaders(headers)
 
   try {
+    const { webhookSid } = await client.conversations
+      .conversations(conversationSid)
+      .fetch()
+      .then(convo => {
+        const attributes = JSON.parse(convo.attributes)
+        return {
+          webhookSid: attributes.webhookSid
+        }
+      })
+
+    // Finally remove the webhook
+    await client.conversations
+      .conversations(conversationSid)
+      .webhooks(webhookSid)
+      .remove()
+
     await client.flexApi.v1
       .interaction(interactionSid)
       .channels(channelSid)

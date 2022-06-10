@@ -64,7 +64,8 @@ const closeInteraction = async (payload, original) => {
 
   const body = {
     channelSid: agent.channelSid,
-    interactionSid: agent.interactionSid
+    interactionSid: agent.interactionSid,
+    conversationSid: agent.mediaProperties.conversationSid
   }
 
   return fetch(URL_CLOSE_AN_INTERACTION, {
