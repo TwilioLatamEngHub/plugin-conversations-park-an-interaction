@@ -22,12 +22,6 @@ export default class ConversationsParkAnInteractionPlugin extends FlexPlugin {
     setUpComponents()
     setUpActions()
 
-    flex.Actions.addListener('afterAcceptTask', task => {
-      flex.Actions.invokeAction('UpdateConversationAttributes', {
-        task: task.task
-      })
-    })
-
     flex.Actions.addListener('beforeCompleteTask', task => {
       flex.Actions.invokeAction('CloseInteraction', { task: task.task })
     })
