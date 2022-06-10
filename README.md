@@ -14,7 +14,7 @@ It adds a "Pause" button in the chat so the conversation history is not lost. Ne
 
 ## Customization
 
-You may need a different use case then what this plugin does today. For example, currently when the customer writes a message, the task is routed to any available agent. If you need to route back to a specific agent, you can simply change the unpark-an-interaction serverless function accordingly ([details for this example here](https://www.twilio.com/docs/flex/developer/conversations/park-an-interaction#add-a-specific-agent-back-to-the-interaction)).
+You may need a different use case then what this plugin does today. For example, currently when the customer writes a message, the task is routed to the specific workflow you added in the .env file. If you need to route back to a specific agent, you can simply change the unpark-an-interaction serverless function accordingly ([details for this example here](https://www.twilio.com/docs/flex/developer/conversations/park-an-interaction#add-a-specific-agent-back-to-the-interaction)).
 
 ## Setup
 
