@@ -34,14 +34,14 @@ cp .env.example .env
 
 Fill the `.env` file accordingly:
 
-| Config&nbsp;Value         | Description                                                                                                                                                                                                                                                                                              |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ACCOUNT_SID               | Your Twilio Account SID. Starts with ACXXXX.                                                                                                                                                                                                                                                             |
-| AUTH_TOKEN                | Your Twilio Account Auth Token.                                                                                                                                                                                                                                                                          |
-| TWILIO_NUMBER             | Your Twilio Phone Number used for Flex. Add in E.164 format. Ex.: +551143214321.                                                                                                                                                                                                                         |
-| WORKSPACE_SID             | TaskRouter Workspace identifier. Obtainable in the console under TaskRouter > Workspaces. Starts with WSXXXX.                                                                                                                                                                                            |
-| WORKFLOW_SID              | The TaskRouter Workflow identifier for the workflow created to route the tasks. Starts with WWXXXX.                                                                                                                                                                                                      |
-| CONVERSATIONS_WEBHOOK_URL | This you will need to add AFTER deploying your Twilio Serveless Functions. Once deployed, in your console under Functions and Assets > Services, click in the corresponding service. Inside you will see a function /unpark-an-interaction. Click on it, then click on Copy URL and paste it in the .env |
+| Config&nbsp;Value         | Description                                                                                                                                                                                                                                                                                                |
+| :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ACCOUNT_SID               | Your Twilio Account SID. Starts with ACXXXX.                                                                                                                                                                                                                                                               |
+| AUTH_TOKEN                | Your Twilio Account Auth Token.                                                                                                                                                                                                                                                                            |
+| TWILIO_NUMBER             | Your Twilio Phone Number used for Flex. Add in E.164 format. Ex.: +551143214321.                                                                                                                                                                                                                           |
+| WORKSPACE_SID             | TaskRouter Workspace identifier. Obtainable in the console under TaskRouter > Workspaces. Starts with WSXXXX.                                                                                                                                                                                              |
+| WORKFLOW_SID              | The TaskRouter Workflow identifier for the workflow created to route the tasks. Starts with WWXXXX.                                                                                                                                                                                                        |
+| CONVERSATIONS_WEBHOOK_URL | This you will need to add AFTER deploying your Twilio Serveless Functions. Once deployed, in your console under Functions and Assets > Services, click in the corresponding service. Inside you will see a function `/unpark-an-interaction`. Click on it, then click on Copy URL and paste it in the .env |
 
 Run
 
@@ -65,9 +65,9 @@ cd plugin-park-an-interaction
 npm install
 ```
 
-Go to the `constants.js` file (inside src > helpers) and change the URLs according to your Twilio functions created earlier - /park-an-interaction and /close-an-interaction.
+Go to the `constants.js` file (inside src > helpers) and change the URLs according to your Twilio functions created earlier `/park-an-interaction` and `/close-an-interaction`.
 
-Finally, to deploy the plugin, run
+Finally, to deploy the plugin, run:
 
 ```bash
 twilio flex:plugins:deploy --changelog "WRITE YOUR CHANGELOG HERE"
