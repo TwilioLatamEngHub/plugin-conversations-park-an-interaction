@@ -12,6 +12,12 @@ exports.handler = async function (context, event, callback) {
   const channelSid = event.channelSid
   const participantSid = event.participantSid
   const conversationSid = event.conversationSid
+  const taskSid = event.taskSid
+  const workflowSid = event.workflowSid
+  const taskChannelUniqueName = event.taskChannelUniqueName
+  const targetSid = event.targetSid
+  const workerName = event.workerName
+  const taskAttributes = event.taskAttributes
 
   const headers = {
     'Access-Control-Allow-Origin': '*', // change this after to the web URL
@@ -46,9 +52,28 @@ exports.handler = async function (context, event, callback) {
         'configuration.url': CONVERSATIONS_WEBHOOK_URL,
         target: 'webhook'
       })
-      .then(webhook => {
-        console.log('webhook')
-        console.log(webhook)
+      .then(async webhook => {
+        const webhookSid = webhook.sid
+        const attributes = {
+          interactionSid,
+          channelSid,
+          participantSid,
+          taskSid,
+          workflowSid,
+          taskChannelUniqueName,
+          targetSid,
+          workerName,
+          taskAttributes,
+          webhookSid
+        }
+
+        await client.conversations
+          .conversations(conversationSid)
+          .update({ attributes: `${JSON.stringify(attributes)}` })
+          .then(conversation => {
+            console.log('conversation attributes updated')
+            console.log(conversation)
+          })
       })
 
     callback(null, response)
