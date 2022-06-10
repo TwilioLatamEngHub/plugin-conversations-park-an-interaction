@@ -1,4 +1,4 @@
-import { Actions, TaskHelper, Manager } from '@twilio/flex-ui'
+import { Actions, TaskHelper, Manager, Notifications } from '@twilio/flex-ui'
 import fetch from 'node-fetch'
 import {
   URL_PARK_AN_INTERACTION,
@@ -36,13 +36,21 @@ const parkInteraction = async (payload, original) => {
     taskAttributes: payload.task.attributes
   }
 
-  return fetch(URL_PARK_AN_INTERACTION, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify(body)
-  })
+  try {
+    await fetch(URL_PARK_AN_INTERACTION, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+
+    return Notifications.showNotification('parkedNotification')
+  } catch (error) {
+    console.error(error)
+
+    return Notifications.showNotification('errorParkedNotification')
+  }
 }
 
 const closeInteraction = async (payload, original) => {
@@ -68,13 +76,17 @@ const closeInteraction = async (payload, original) => {
     conversationSid: agent.mediaProperties.conversationSid
   }
 
-  return fetch(URL_CLOSE_AN_INTERACTION, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify(body)
-  })
+  try {
+    fetch(URL_CLOSE_AN_INTERACTION, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export const setUpActions = () => {

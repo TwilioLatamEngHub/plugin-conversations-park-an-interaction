@@ -1,8 +1,8 @@
 import React from 'react'
 import { FlexPlugin } from '@twilio/flex-plugin'
 
-import { setUpActions } from './actions/actions'
-import { setUpComponents } from './components/components'
+import { setUpActions, registerNotifications } from './actions'
+import { setUpComponents } from './components'
 
 const PLUGIN_NAME = 'ConversationsParkAnInteractionPlugin'
 
@@ -21,6 +21,7 @@ export default class ConversationsParkAnInteractionPlugin extends FlexPlugin {
   async init(flex, manager) {
     setUpComponents()
     setUpActions()
+    registerNotifications()
 
     flex.Actions.addListener('beforeCompleteTask', task => {
       flex.Actions.invokeAction('CloseInteraction', { task: task.task })
