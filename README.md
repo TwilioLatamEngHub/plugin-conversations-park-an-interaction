@@ -1,5 +1,9 @@
 # Twilio Flex Conversations Park an Interaction Plugin
 
+## Disclaimer
+
+**This software is to be considered "sample code", a Type B Deliverable, and is delivered "as-is" to the user. Twilio bears no responsibility to support the use or implementation of this software.**
+
 ## Important note
 
 To use this plugin you need to have Flex Conversations enabled on your account as well as Flex UI 2.0. Please read our doc for more details about it: https://www.twilio.com/docs/flex/developer/conversations
