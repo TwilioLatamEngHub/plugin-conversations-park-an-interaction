@@ -7,7 +7,6 @@ exports.handler = async function (context, event, callback) {
   const client = context.getTwilioClient()
   const INTERACTIONS_URL = context.INTERACTIONS_URL
   const workspaceSid = context.WORKSPACE_SID
-  const workflowSid = context.WORKFLOW_SID
 
   const conversationSid = event.ConversationSid
 
@@ -26,7 +25,8 @@ exports.handler = async function (context, event, callback) {
       channelSid,
       taskAttributes,
       taskChannelUniqueName,
-      webhookSid
+      webhookSid,
+      workflowSid
     } = await client.conversations
       .conversations(conversationSid)
       .fetch()
@@ -37,7 +37,8 @@ exports.handler = async function (context, event, callback) {
           channelSid: attributes.channelSid,
           taskAttributes: attributes.taskAttributes,
           taskChannelUniqueName: attributes.taskChannelUniqueName,
-          webhookSid: attributes.webhookSid
+          webhookSid: attributes.webhookSid,
+          workflowSid: attributes.workflowSid
         }
       })
 
