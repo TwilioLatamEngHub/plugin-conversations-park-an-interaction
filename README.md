@@ -26,7 +26,7 @@ You may need a different use case then what this plugin does today. For example,
 
 This plugin includes a service used to park/unpark/close the interactions using Twilio Functions. Make sure you have the [Twilio Serverless Toolkit](https://www.twilio.com/docs/labs/serverless-toolkit/getting-started) installed before proceding.
 
-After installing it correctly, follow the procedure below:
+- After installing it correctly, follow the procedure below:
 
 ```bash
 cd serverless-park-an-interaction
@@ -36,7 +36,7 @@ cd serverless-park-an-interaction
 cp .env.example .env
 ```
 
-Fill the `.env` file accordingly:
+- Fill the `.env` file accordingly:
 
 | Config&nbsp;Value         | Description                                                                                                                                                                                                                                                                                                |
 | :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -46,7 +46,7 @@ Fill the `.env` file accordingly:
 | WORKSPACE_SID             | TaskRouter Workspace identifier. Obtainable in the console under TaskRouter > Workspaces. Starts with WSXXXX.                                                                                                                                                                                              |
 | CONVERSATIONS_WEBHOOK_URL | This you will need to add AFTER deploying your Twilio Serveless Functions. Once deployed, in your console under Functions and Assets > Services, click in the corresponding service. Inside you will see a function `/unpark-an-interaction`. Click on it, then click on Copy URL and paste it in the .env |
 
-Run
+- Run
 
 ```bash
 twilio serverless:deploy
@@ -54,11 +54,11 @@ twilio serverless:deploy
 
 #### \*DO NOT FORGET
 
-After the first deploy, you need to add the CONVERSATIONS_WEBHOOK_URL and run the `twilio serverless:deploy` command once again.
+- After the first deploy, you need to add the CONVERSATIONS_WEBHOOK_URL and run the `twilio serverless:deploy` command once again.
 
 ### Plugin
 
-First install the dependencies in the plugin's folder:
+- First install the dependencies in the plugin's folder:
 
 ```bash
 # If you are inside the serverless folder, first run: cd ..
@@ -68,15 +68,17 @@ cd plugin-park-an-interaction
 npm install
 ```
 
-Go to the `constants.js` file (inside src > helpers) and change the URLs according to your Twilio functions created earlier `/park-an-interaction` and `/close-an-interaction`.
+- Inside the `/public` folder, create a `appConfig.js` file according to the `appConfig.example.js` file.
 
-Finally, to deploy the plugin, run:
+- Go to the `constants.js` file (inside src > utils) and change the URLs according to your Twilio functions created earlier `/park-an-interaction` and `/close-an-interaction`.
+
+- Finally, to deploy the plugin, run:
 
 ```bash
 twilio flex:plugins:deploy --changelog "WRITE YOUR CHANGELOG HERE"
 ```
 
-You can also run the plugin locally for testing purposes:
+- You can also run the plugin locally for testing purposes:
 
 ```bash
 twilio flex:plugins:start
