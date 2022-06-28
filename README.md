@@ -58,7 +58,7 @@ twilio serverless:deploy
 
 ### Plugin
 
-- First install the dependencies in the plugin's folder:
+- First install the dependencies in the plugin's folder and create the `.env` file:
 
 ```bash
 # If you are inside the serverless folder, first run: cd ..
@@ -66,11 +66,16 @@ cd plugin-park-an-interaction
 
 # If you use npm
 npm install
+
+# Create the .env according to the example
+cp .env.example .env
 ```
+
+- Fill the `.env` file with the URLs of your Twilio functions created earlier `/park-an-interaction` and `/close-an-interaction` respectively.
 
 - Inside the `/public` folder, create a `appConfig.js` file according to the `appConfig.example.js` file.
 
-- Go to the `constants.js` file (inside src > utils) and change the URLs according to your Twilio functions created earlier `/park-an-interaction` and `/close-an-interaction`.
+- Go to the `constants.js` file (inside src > utils) and change the URLs .
 
 - Finally, to deploy the plugin, run:
 
