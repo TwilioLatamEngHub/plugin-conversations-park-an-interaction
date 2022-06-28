@@ -1,8 +1,9 @@
 import React from 'react'
 import { FlexPlugin } from '@twilio/flex-plugin'
 
-import { setUpActions, registerNotifications } from './actions'
 import { ParkButton } from './components'
+import './notifications'
+import './actions'
 
 const PLUGIN_NAME = 'ConversationsParkAnInteractionPlugin'
 
@@ -19,9 +20,6 @@ export default class ConversationsParkAnInteractionPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
-    setUpActions()
-    registerNotifications()
-
     flex.TaskCanvasHeader.Content.add(
       <ParkButton key='conversation-park-button' />,
       {
