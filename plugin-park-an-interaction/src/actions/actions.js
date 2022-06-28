@@ -5,7 +5,7 @@ import {
   URL_CLOSE_AN_INTERACTION
 } from '../utils/constants'
 
-const getAgent = (payload) => {
+const getAgent = async payload => {
   const participants = await payload.task.getParticipants(
     payload.task.attributes.flexInteractionChannelSid
   )
@@ -26,7 +26,7 @@ const parkInteraction = async (payload, original) => {
     return original(payload)
   }
 
-  const agent = getAgent(payload)
+  const agent = await getAgent(payload)
 
   const manager = Manager.getInstance()
   const body = {
@@ -64,7 +64,7 @@ const closeInteraction = async (payload, original) => {
     return original(payload)
   }
 
-  const agent = getAgent(payload)
+  const agent = await getAgent(payload)
 
   const body = {
     channelSid: agent.channelSid,
