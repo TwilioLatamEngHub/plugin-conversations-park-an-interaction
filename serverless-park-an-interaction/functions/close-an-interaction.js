@@ -17,6 +17,7 @@ exports.handler = async function (context, event, callback) {
   response.setHeaders(headers)
 
   try {
+    // Fetch the webhook sid so we can remove it
     const { webhookSid } = await client.conversations
       .conversations(conversationSid)
       .fetch()
@@ -27,12 +28,13 @@ exports.handler = async function (context, event, callback) {
         }
       })
 
-    // Finally remove the webhook
+    // Remove the webhook
     await client.conversations
       .conversations(conversationSid)
       .webhooks(webhookSid)
       .remove()
 
+    // Close the interaction
     await client.flexApi.v1
       .interaction(interactionSid)
       .channels(channelSid)

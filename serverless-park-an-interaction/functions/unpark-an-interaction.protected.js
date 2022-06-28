@@ -1,11 +1,7 @@
-const axios = require('axios')
-const FormData = require('form-data')
-
 exports.handler = async function (context, event, callback) {
   const response = new Twilio.Response()
 
   const client = context.getTwilioClient()
-  const INTERACTIONS_URL = context.INTERACTIONS_URL
   const workspaceSid = context.WORKSPACE_SID
 
   const conversationSid = event.ConversationSid
@@ -20,6 +16,7 @@ exports.handler = async function (context, event, callback) {
   response.setHeaders(headers)
 
   try {
+    // Fetch the conversation attributes updated when parked
     const {
       interactionSid,
       channelSid,
@@ -48,28 +45,21 @@ exports.handler = async function (context, event, callback) {
       .webhooks(webhookSid)
       .remove()
 
-    const inviteUrl = `${INTERACTIONS_URL}/${interactionSid}/Channels/${channelSid}/Invites`
-
-    const routingBody = `{"type":"TaskRouter",
-    "properties":{
-      "workspace_sid":"${workspaceSid}",
-      "workflow_sid":"${workflowSid}",
-      "task_channel_unique_name": "${taskChannelUniqueName}",
-      "attributes": ${JSON.stringify(taskAttributes)} } }`
-
-    const formData = new FormData()
-    formData.append('Routing', routingBody)
-
-    await axios({
-      method: 'post',
-      url: inviteUrl,
-      data: formData,
-      headers: formData.getHeaders(),
-      auth: {
-        username: process.env.ACCOUNT_SID,
-        password: process.env.AUTH_TOKEN
-      }
-    })
+    // Create a new task through the invites endpoint. Alternatively you can pass
+    // a queue_sid and a worker_sid inside properties to add a specific agent back to the interation
+    await client.flexApi.v1
+      .interaction(interactionSid)
+      .channels(channelSid)
+      .invites.create({
+        routing: {
+          properties: {
+            workspace_sid: workspaceSid,
+            workflow_sid: workflowSid,
+            task_channel_unique_name: taskChannelUniqueName,
+            attributes: taskAttributes
+          }
+        }
+      })
 
     callback(null, response)
   } catch (error) {

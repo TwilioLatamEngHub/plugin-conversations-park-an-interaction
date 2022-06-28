@@ -1,11 +1,7 @@
-const axios = require('axios')
-const FormData = require('form-data')
-
 exports.handler = async function (context, event, callback) {
   const response = new Twilio.Response()
 
   const client = context.getTwilioClient()
-  const INTERACTIONS_URL = context.INTERACTIONS_URL
   const CONVERSATIONS_WEBHOOK_URL = context.CONVERSATIONS_WEBHOOK_URL
 
   const interactionSid = event.interactionSid
@@ -29,21 +25,17 @@ exports.handler = async function (context, event, callback) {
   response.setHeaders(headers)
 
   try {
-    const closeParticipantUrl = `${INTERACTIONS_URL}/${interactionSid}/Channels/${channelSid}/Participants/${participantSid}`
-    const formData = new FormData()
-    formData.append('Status', 'closed')
+    // Remove the agent
+    await client.flexApi.v1
+      .interaction(interactionSid)
+      .channels(channelSid)
+      .participants(participantSid)
+      .update({ status: 'closed' })
+      .then(interaction_channel_participant =>
+        console.log(interaction_channel_participant)
+      )
 
-    await axios({
-      method: 'post',
-      url: closeParticipantUrl,
-      data: formData,
-      headers: formData.getHeaders(),
-      auth: {
-        username: context.ACCOUNT_SID,
-        password: context.AUTH_TOKEN
-      }
-    })
-
+    // Create the webhook and update conversation attributes
     await client.conversations
       .conversations(conversationSid)
       .webhooks.create({
