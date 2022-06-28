@@ -1,8 +1,8 @@
 import { Actions, TaskHelper, Manager, Notifications } from '@twilio/flex-ui'
 import fetch from 'node-fetch'
 
-const URL_PARK_AN_INTERACTION = process.env.URL_PARK_AN_INTERACTION
-const URL_CLOSE_AN_INTERACTION = process.env.URL_CLOSE_AN_INTERACTION
+const URL_PARK_AN_INTERACTION = process.env.FLEX_APP_URL_PARK_AN_INTERACTION
+const URL_CLOSE_AN_INTERACTION = process.env.FLEX_APP_URL_CLOSE_AN_INTERACTION
 
 const getAgent = async payload => {
   const participants = await payload.task.getParticipants(
