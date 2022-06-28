@@ -11,7 +11,7 @@ const ButtonWrapper = styled.div`
   color: #fff;
 `
 
-const ParkButton = props => {
+export const ParkButton = props => {
   const [isLoading, setIsLoading] = useState(false)
   const [cursor, setCursor] = useState('pointer')
 
@@ -35,5 +35,3 @@ const ParkButton = props => {
     </Theme.Provider>
   )
 }
-
-export default ParkButton
