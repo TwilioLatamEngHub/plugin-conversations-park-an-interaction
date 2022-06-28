@@ -3,13 +3,9 @@ import fetch from 'node-fetch'
 import {
   URL_PARK_AN_INTERACTION,
   URL_CLOSE_AN_INTERACTION
-} from '../helpers/constants'
+} from '../utils/constants'
 
-const parkInteraction = async (payload, original) => {
-  if (!TaskHelper.isCBMTask(payload.task)) {
-    return original(payload)
-  }
-
+const getAgent = (payload) => {
   const participants = await payload.task.getParticipants(
     payload.task.attributes.flexInteractionChannelSid
   )
@@ -21,6 +17,16 @@ const parkInteraction = async (payload, original) => {
       break
     }
   }
+
+  return agent
+}
+
+const parkInteraction = async (payload, original) => {
+  if (!TaskHelper.isCBMTask(payload.task)) {
+    return original(payload)
+  }
+
+  const agent = getAgent(payload)
 
   const manager = Manager.getInstance()
   const body = {
@@ -58,17 +64,7 @@ const closeInteraction = async (payload, original) => {
     return original(payload)
   }
 
-  const participants = await payload.task.getParticipants(
-    payload.task.attributes.flexInteractionChannelSid
-  )
-
-  let agent
-  for (const p of participants) {
-    if (p.type === 'agent') {
-      agent = p
-      break
-    }
-  }
+  const agent = getAgent(payload)
 
   const body = {
     channelSid: agent.channelSid,
@@ -89,11 +85,9 @@ const closeInteraction = async (payload, original) => {
   }
 }
 
-export const setUpActions = () => {
-  Actions.registerAction('ParkInteraction', (payload, original) =>
-    parkInteraction(payload, original)
-  )
-  Actions.registerAction('CloseInteraction', (payload, original) =>
-    closeInteraction(payload, original)
-  )
-}
+Actions.registerAction('ParkInteraction', (payload, original) =>
+  parkInteraction(payload, original)
+)
+Actions.registerAction('CloseInteraction', (payload, original) =>
+  closeInteraction(payload, original)
+)
