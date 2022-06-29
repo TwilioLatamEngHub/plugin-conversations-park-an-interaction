@@ -1,6 +1,7 @@
-exports.handler = async function (context, event, callback) {
-  const response = new Twilio.Response()
+const path = Runtime.getFunctions()['response-header'].path
+const response = require(path).response()
 
+exports.handler = async function (context, event, callback) {
   const client = context.getTwilioClient()
   const CONVERSATIONS_WEBHOOK_URL = context.CONVERSATIONS_WEBHOOK_URL
 
@@ -14,15 +15,6 @@ exports.handler = async function (context, event, callback) {
   const targetSid = event.targetSid
   const workerName = event.workerName
   const taskAttributes = event.taskAttributes
-
-  const headers = {
-    'Access-Control-Allow-Origin': '*', // change this after to the web URL
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Credentials': true,
-    'Content-Type': 'application/json'
-  }
-  response.setHeaders(headers)
 
   try {
     // Remove the agent

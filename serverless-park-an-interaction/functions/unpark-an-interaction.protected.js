@@ -1,19 +1,11 @@
-exports.handler = async function (context, event, callback) {
-  const response = new Twilio.Response()
+const path = Runtime.getFunctions()['response-header'].path
+const response = require(path).response()
 
+exports.handler = async function (context, event, callback) {
   const client = context.getTwilioClient()
   const workspaceSid = context.WORKSPACE_SID
 
   const conversationSid = event.ConversationSid
-
-  const headers = {
-    'Access-Control-Allow-Origin': '*', // change this after to the web URL
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Credentials': true,
-    'Content-Type': 'application/json'
-  }
-  response.setHeaders(headers)
 
   try {
     // Fetch the conversation attributes updated when parked
