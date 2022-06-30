@@ -12,9 +12,9 @@ To use this plugin you need to have Flex Conversations enabled on your account a
 
 This plugin is based in the instructions given on our doc on how to [Park an Interaction](https://www.twilio.com/docs/flex/developer/conversations/park-an-interaction). In the legacy Flex this functionality was known as "long-lived channels", but with the new Flex Conversations this feature needs to be built - hence the need for this plugin.
 
-It adds a "Pause" button in the chat so the conversation history is not lost. Next time the customer writes a message, if the chat was paused, the history of the conversation will be present.
+It adds a pause button in the chat so the conversation history is not lost. Next time the customer writes a message, if the chat was paused, the history of the conversation will be present.
 
-![park screen](park-screen.png)
+![pause screen](pause-screen.png)
 
 ## Customization
 
