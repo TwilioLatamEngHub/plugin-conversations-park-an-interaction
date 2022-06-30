@@ -2,36 +2,39 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Actions } from '@twilio/flex-ui'
 
-import { Button } from '@twilio-paste/core/button'
+import { PauseIcon } from '@twilio-paste/icons/esm/PauseIcon'
 import { Theme } from '@twilio-paste/core/theme'
+import { Spinner } from '@twilio-paste/core/spinner'
 
-const ButtonWrapper = styled.div`
-  margin: 1rem;
-  font-size: 1rem;
+const IconWrapper = styled.div`
+  margin: 0.8rem;
   color: #fff;
+  cursor: ${props => (props.isLoading ? 'not-allowed' : 'pointer')};
 `
 
 export const ParkButton = props => {
   const [isLoading, setIsLoading] = useState(false)
-  const [cursor, setCursor] = useState('pointer')
 
   return (
     <Theme.Provider theme='default'>
-      <ButtonWrapper>
-        <Button
-          variant='reset'
-          size='reset'
-          loading={isLoading}
-          style={{ cursor: cursor }}
+      {isLoading ? (
+        <IconWrapper isLoading={isLoading}>
+          <Spinner size='sizeIcon40' decorative={false} title='Loading' />
+        </IconWrapper>
+      ) : (
+        <IconWrapper
           onClick={() => {
             setIsLoading(true)
-            setCursor('not-allowed')
             Actions.invokeAction('ParkInteraction', { task: props.task })
           }}
         >
-          Pause
-        </Button>
-      </ButtonWrapper>
+          <PauseIcon
+            decorative={false}
+            title='Pause Interaction'
+            size='sizeIcon40'
+          />
+        </IconWrapper>
+      )}
     </Theme.Provider>
   )
 }
