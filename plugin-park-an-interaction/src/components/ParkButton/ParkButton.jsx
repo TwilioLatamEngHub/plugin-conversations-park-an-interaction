@@ -7,7 +7,10 @@ import { Theme } from '@twilio-paste/core/theme'
 import { Spinner } from '@twilio-paste/core/spinner'
 
 const IconWrapper = styled.div`
-  margin: 0.8rem;
+  margin: 0.7rem;
+  padding: 0.2rem;
+  border-radius: 0.25rem;
+  background-color: #060339;
   color: #fff;
   cursor: ${props => (props.isLoading ? 'not-allowed' : 'pointer')};
 `
