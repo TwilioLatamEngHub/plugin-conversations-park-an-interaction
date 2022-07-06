@@ -29,9 +29,5 @@ export default class ConversationsParkAnInteractionPlugin extends FlexPlugin {
           props.task.taskStatus === 'assigned'
       }
     )
-
-    flex.Actions.addListener('beforeCompleteTask', task => {
-      flex.Actions.invokeAction('CloseInteraction', { task: task.task })
-    })
   }
 }

@@ -69,7 +69,7 @@ npm install
 cp .env.example .env
 ```
 
-- Fill the `.env` file with the URLs of your Twilio functions created earlier `/park-an-interaction` and `/close-an-interaction` respectively.
+- Fill the `.env` file with the URL of your Twilio function created earlier `/park-an-interaction`.
 
 - Inside the `/public` folder, create a `appConfig.js` file according to the `appConfig.example.js` file.
 

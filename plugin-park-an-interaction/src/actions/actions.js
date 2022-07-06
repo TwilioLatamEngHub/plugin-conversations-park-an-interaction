@@ -2,7 +2,6 @@ import { Actions, TaskHelper, Manager, Notifications } from '@twilio/flex-ui'
 import fetch from 'node-fetch'
 
 const URL_PARK_AN_INTERACTION = process.env.FLEX_APP_URL_PARK_AN_INTERACTION
-const URL_CLOSE_AN_INTERACTION = process.env.FLEX_APP_URL_CLOSE_AN_INTERACTION
 
 const getAgent = async payload => {
   const participants = await payload.task.getParticipants(
@@ -58,35 +57,6 @@ const parkInteraction = async (payload, original) => {
   }
 }
 
-const closeInteraction = async (payload, original) => {
-  if (!TaskHelper.isCBMTask(payload.task)) {
-    return original(payload)
-  }
-
-  const agent = await getAgent(payload)
-
-  const body = {
-    channelSid: agent.channelSid,
-    interactionSid: agent.interactionSid,
-    conversationSid: agent.mediaProperties.conversationSid
-  }
-
-  try {
-    fetch(URL_CLOSE_AN_INTERACTION, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(body)
-    })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 Actions.registerAction('ParkInteraction', (payload, original) =>
   parkInteraction(payload, original)
-)
-Actions.registerAction('CloseInteraction', (payload, original) =>
-  closeInteraction(payload, original)
 )
