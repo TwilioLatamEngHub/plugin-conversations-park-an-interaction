@@ -3,15 +3,10 @@ import styled from 'styled-components'
 import { Actions } from '@twilio/flex-ui'
 
 import { PauseIcon } from '@twilio-paste/icons/esm/PauseIcon'
-import { Theme } from '@twilio-paste/core/theme'
 import { Spinner } from '@twilio-paste/core/spinner'
 
 const IconWrapper = styled.div`
-  margin: 0.7rem;
-  padding: 0.2rem;
-  border-radius: 0.25rem;
-  background-color: #060339;
-  color: #fff;
+  margin: 0.8rem;
   cursor: ${props => (props.isLoading ? 'not-allowed' : 'pointer')};
 `
 
@@ -19,7 +14,7 @@ export const ParkButton = props => {
   const [isLoading, setIsLoading] = useState(false)
 
   return (
-    <Theme.Provider theme='default'>
+    <>
       {isLoading ? (
         <IconWrapper isLoading={isLoading}>
           <Spinner size='sizeIcon40' decorative={false} title='Loading' />
@@ -38,6 +33,6 @@ export const ParkButton = props => {
           />
         </IconWrapper>
       )}
-    </Theme.Provider>
+    </>
   )
 }

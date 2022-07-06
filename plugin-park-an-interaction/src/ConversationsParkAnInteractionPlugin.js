@@ -1,5 +1,6 @@
 import React from 'react'
 import { FlexPlugin } from '@twilio/flex-plugin'
+import { CustomizationProvider } from '@twilio-paste/core/customization'
 
 import { ParkButton } from './components'
 import './notifications'
@@ -20,6 +21,10 @@ export default class ConversationsParkAnInteractionPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
+    flex.setProviders({
+      PasteThemeProvider: CustomizationProvider
+    })
+
     flex.TaskCanvasHeader.Content.add(
       <ParkButton key='conversation-park-button' />,
       {
