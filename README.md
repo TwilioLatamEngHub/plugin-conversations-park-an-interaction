@@ -73,8 +73,6 @@ cp .env.example .env
 
 - Inside the `/public` folder, create a `appConfig.js` file according to the `appConfig.example.js` file.
 
-- Go to the `constants.js` file (inside src > utils) and change the URLs .
-
 - Finally, to deploy the plugin, run:
 
 ```bash
