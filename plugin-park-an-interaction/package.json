@@ -1,6 +1,6 @@
 {
   "name": "plugin-conversations-park-an-interaction",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "postinstall": "flex-plugin pre-script-check"
@@ -8,14 +8,14 @@
   "dependencies": {
     "@twilio-paste/core": "^10.14.0",
     "@twilio-paste/icons": "^5.7.0",
+    "@twilio/flex-plugin-scripts": "6.0.2",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "styled-components": "^5.3.5",
-    "@twilio/flex-plugin-scripts": "6.0.2"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "@twilio/flex-ui": "2.0.0-beta.1",
+    "@twilio/flex-ui": "^2.0.0-beta.1",
     "react-test-renderer": "17.0.2"
   }
 }
